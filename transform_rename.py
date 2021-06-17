@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 from math import *
 from scipy.stats import mode
+import time
 
 # 图像矫正类
 class ImgCorrect:
@@ -163,8 +164,9 @@ def add_prefix_subfolders(input_path,out_path):             # 定义函数名称
 
 # 图像矫正并保存
 if __name__ == "__main__":
+    time = time.strftime("%Y%m%d", time.localtime())
     input_path = r'I:/Images_OCR/after_image/med'
-    out_path = r'I:/Images_OCR/after_image/Transform_med'
+    out_path = r'I:/Images_OCR/after_image/Voc_med/images'
     if not os.path.exists(out_path):
         os.makedirs(out_path)
     imgs_lists = []
@@ -175,7 +177,7 @@ if __name__ == "__main__":
     for image_file in imgs_lists:
         img = cv2.imread(image_file)
         correct_image = imgTransform(img)  # 矫正
-        newPath = os.path.join(os.path.abspath(out_path), 'a'+str(i) + '.jpg')
+        newPath = os.path.join(os.path.abspath(out_path), time+'_'+str(i) + '.jpg')
         cv2.imwrite(newPath, correct_image)
         print(image_file + "====>" + newPath)
         i += 1
