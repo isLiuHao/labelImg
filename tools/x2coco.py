@@ -244,7 +244,7 @@ def voc_get_coco_annotation(obj, label2id):
         'area': o_width * o_height,
         'iscrowd': 0,
         'bbox': [xmin, ymin, o_width, o_height],
-        'category_id': category_id-1,
+        'category_id': category_id,
         'ignore': 0,
     }
     return anno
@@ -275,9 +275,10 @@ def voc_xmls_to_cocojson(annotation_paths, label2id, output_dir, output_file):
             ann.update({'image_id': img_id, 'id': bnd_id})
             output_json_dict['annotations'].append(ann)
             bnd_id = bnd_id + 1
-
+    category_info = {'supercategory': 'none', 'id': 0, 'name': 'background'}
+    output_json_dict['categories'].append(category_info)
     for label, label_id in label2id.items():
-        category_info = {'supercategory': 'none', 'id': label_id-1, 'name': label}
+        category_info = {'supercategory': 'none', 'id': label_id, 'name': label}
         output_json_dict['categories'].append(category_info)
     output_file = os.path.join(output_dir, output_file)
     with open(output_file, 'w') as f:
