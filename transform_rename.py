@@ -143,12 +143,17 @@ class ImgCorrect:
         return imgRotation
 
 # 图像矫正函数调用
-def imgTransform(img):
-    img_correct = ImgCorrect(img)
-    img_correct.img_lines()
-    degree = img_correct.search_lines()
-    correct_image = img_correct.rotate_image(degree)  # 图像矫正
-    return correct_image
+def imgTransform(image_file,img):
+    try:
+        img_correct = ImgCorrect(img)
+        img_correct.img_lines()
+        degree = img_correct.search_lines()
+        correct_image = img_correct.rotate_image(degree)  # 图像矫正
+    except:
+        print("矫正失败:"+image_file)
+        return img
+    else:
+        return correct_image
 
 # 图像重命名
 def add_prefix_subfolders(input_path,out_path):             # 定义函数名称
@@ -165,7 +170,7 @@ def add_prefix_subfolders(input_path,out_path):             # 定义函数名称
 # 图像矫正并保存
 if __name__ == "__main__":
     time = time.strftime("%Y%m%d", time.localtime())
-    input_path = r'I:/Images_OCR/after_image/med2'
+    input_path = r'I:/Images_OCR/after_image/med2_429'
     out_path = r'I:/Images_OCR/after_image/Voc_med/images'
     if not os.path.exists(out_path):
         os.makedirs(out_path)
@@ -173,10 +178,10 @@ if __name__ == "__main__":
     for single_file in os.listdir(input_path):
         file_path = os.path.join(input_path, single_file)
         imgs_lists.append(file_path)
-    i = 171
+    i = 0
     for image_file in imgs_lists:
         img = cv2.imread(image_file)
-        correct_image = imgTransform(img)  # 矫正
+        correct_image = imgTransform(image_file,img)  # 矫正
         newPath = os.path.join(os.path.abspath(out_path), time+'_'+str(i) + '.jpg')
         cv2.imwrite(newPath, correct_image)
         print(image_file + "====>" + newPath)
