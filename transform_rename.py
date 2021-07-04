@@ -170,7 +170,7 @@ def add_prefix_subfolders(input_path,out_path):             # 定义函数名称
 # 图像矫正并保存
 if __name__ == "__main__":
     time = time.strftime("%Y%m%d", time.localtime())
-    input_path = r'I:/Images_OCR/after_image/med2_429'
+    input_path = r'I:/Images_OCR/after_image/med2_4000+'
     out_path = r'I:/Images_OCR/after_image/Voc_med/images'
     if not os.path.exists(out_path):
         os.makedirs(out_path)
