@@ -167,7 +167,7 @@ def add_prefix_subfolders(input_path,out_path):             # 定义函数名称
             print('converting %s to %s ...' % (src, dst))
             i += 1
 
-# 图像矫正并保存
+# 图像矫正并重命名
 if __name__ == "__main__":
     time = time.strftime("%Y%m%d", time.localtime())
     input_path = r'I:/Images_OCR/after_image/med2_4000+'

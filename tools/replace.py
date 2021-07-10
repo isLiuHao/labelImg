@@ -1,5 +1,5 @@
 import argparse
-
+# 将test.txt转化为testvoc2coco.txt
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--in_path',default='I:/Images_OCR/after_image/Voc_med/test.txt')
